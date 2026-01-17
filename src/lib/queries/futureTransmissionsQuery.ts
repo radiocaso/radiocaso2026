@@ -1,4 +1,4 @@
-import { client } from "../sanityClient";
+import { client } from "@/lib/sanityClient";
 import { defineQuery } from "groq";
 
 const futureTransmissionsQuery =
