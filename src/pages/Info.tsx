@@ -1,3 +1,4 @@
+import SectionTitle from "@/components/SectionTitle";
 import { useInitialData } from "@/hooks/useInitialData";
 import { PortableText } from "@portabletext/react";
 
@@ -8,8 +9,11 @@ export default function Info() {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <div className="max-w-prose text-sm">
-      {data?.descripcion && <PortableText value={data.descripcion} />}
-    </div>
+    <>
+      <SectionTitle title="Información" />
+      <div className="max-w-prose text-sm">
+        {data?.descripcion && <PortableText value={data.descripcion} />}
+      </div>
+    </>
   );
 }
