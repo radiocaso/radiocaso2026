@@ -15,13 +15,13 @@ export default function Header() {
         <NavLink to="/">
           <div className="flex items-end gap-2">
             {data?.titulo && (
-              <h1 className="text-2xl font-bold">{data?.titulo}</h1>
+              <h1 className="text-7xl font-bold">{data?.titulo}</h1>
             )}
             {data?.logo && (
               <img
                 className="invert"
                 src={
-                  urlFor(data.logo).format("webp").width(50).url() + "&fit=max"
+                  urlFor(data.logo).format("webp").width(100).url() + "&fit=max"
                 }
               />
             )}

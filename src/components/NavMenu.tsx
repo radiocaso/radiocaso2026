@@ -9,6 +9,7 @@ export default function NavMenu() {
         <NavLink
           key={section}
           to={`/${section}`}
+          className="flex size-24 items-center justify-center rounded-full border-2 text-xs uppercase"
         >
           {section}
         </NavLink>
