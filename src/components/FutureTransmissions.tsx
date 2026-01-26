@@ -1,5 +1,7 @@
 import { useFutureTransmissions } from "@/hooks/useFutureTransmissions";
 import type { FutureTransmissionsQueryResult } from "@/lib/types";
+import { format, parseISO } from "date-fns";
+import { es } from "date-fns/locale";
 
 export default function FutureTransmissions() {
   const { data, isLoading, error } = useFutureTransmissions();
@@ -12,7 +14,18 @@ export default function FutureTransmissions() {
       {data?.map((t: FutureTransmissionsQueryResult[number]) => {
         return (
           <li key={t._id} className="mb-6 border-b border-white/20 pb-2">
-            {t.fecha && <h2 className="text-xs">{t.fecha}</h2>}
+            {t.fecha && (
+              <h2 className="text-xs">
+                {t.fecha &&
+                  format(
+                    parseISO(t.fecha),
+                    "⋮ dd 'de' MMMM, yyyy ⋮ HH:mm 'UTC'",
+                    {
+                      locale: es,
+                    },
+                  )}
+              </h2>
+            )}
             {t.titulo && <h1 className="font-bold">{t.titulo}</h1>}
             {t.contexto?.titulo && <p>{t.contexto.titulo}</p>}
             {t.programa?.titulo && <p>programa: {t.programa.titulo}</p>}
