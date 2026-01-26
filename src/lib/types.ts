@@ -204,8 +204,13 @@ export type Transmision = {
   numeroDeTemporada?: number;
   titulo?: string;
   slug?: Slug;
-  descripcion?: BlockContent;
   descripcionCorta?: string;
+  descripcion?: BlockContent;
+  link?: {
+    titulo?: string;
+    url?: string;
+    texto?: string;
+  };
   fecha?: string;
   fechaFinal?: string;
   enVivo?: boolean;
@@ -609,11 +614,35 @@ export type InitialDataQueryResult = {
   > | null;
 } | null;
 
+// Source: ../radiocaso2026/src/lib/queries/publicationsQuery.ts
+// Variable: publicationsQuery
+// Query: *[_type == "publicacion"] | order(fecha desc) {       _id,      titulo,      slug,      fecha,      tipoDePublicacion,      descripcion,      recursos[]->{        _id,        titulo,        url,        archivo{          asset->{            url          }        },      },      creditos    }
+export type PublicationsQueryResult = Array<{
+  _id: string;
+  titulo: string | null;
+  slug: Slug | null;
+  fecha: string | null;
+  tipoDePublicacion: string | null;
+  descripcion: BlockContent | null;
+  recursos: Array<null> | null;
+  creditos: ArrayOf<GrupoReference | PersonaReference> | null;
+}>;
+
+// Source: ../radiocaso2026/src/lib/queries/tagsQuery.ts
+// Variable: tagsQuery
+// Query: *[_type == "tag"] {    _id,    tag,  }
+export type TagsQueryResult = Array<{
+  _id: string;
+  tag: string | null;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "transmision" && fecha > now()] | order(fecha asc) { \n    _id,\n    titulo,\n    fecha,\n    tipoDeTransmision[]->{\n      _id,\n      tipoDeTransmision\n    },\n    programa->{\n      _id,\n      titulo},\n    contexto->{\n      _id,\n      titulo},\n    descripcionCorta,\n  }': FutureTransmissionsQueryResult;
     '*[_type == "infoGeneral"][0] {\n    titulo,\n    descripcion,\n    contacto,\n    redesSociales,\n    logo,\n    configuracionDeTransmision,\n    destacados[]->{\n      _id,\n      _type,\n      titulo,\n      slug,\n    },\n  }': InitialDataQueryResult;
+    '*[_type == "publicacion"] | order(fecha desc) { \n      _id,\n      titulo,\n      slug,\n      fecha,\n      tipoDePublicacion,\n      descripcion,\n      recursos[]->{\n        _id,\n        titulo,\n        url,\n        archivo{\n          asset->{\n            url\n          }\n        },\n      },\n      creditos\n    }': PublicationsQueryResult;
+    '*[_type == "tag"] {\n    _id,\n    tag,\n  }': TagsQueryResult;
   }
 }
