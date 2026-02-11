@@ -5,6 +5,7 @@ import Schedule from "@/pages/Schedule";
 import Archive from "@/pages/Archive";
 import Publications from "@/pages/Publications";
 import Info from "@/pages/Info";
+import Player from "./components/Player";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           <Route path="/info" element={<Info />} />
         </Routes>
       </section>
+      <div className="fixed bottom-0 left-0 w-full">
+        <Player />
+      </div>
     </div>
   );
 }
