@@ -32,10 +32,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <section>
-        <SectionTitle title="Próximas Transmisiones" />
-        <FutureTransmissions />
-      </section>
+      <FutureTransmissions />
 
       <section>
         <SectionTitle title="Tags" />
