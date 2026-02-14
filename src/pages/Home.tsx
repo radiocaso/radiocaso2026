@@ -2,6 +2,8 @@ import FutureTransmissions from "@/components/FutureTransmissions";
 import SectionTitle from "@/components/SectionTitle";
 import { useInitialData } from "@/hooks/useInitialData";
 import { useTags } from "@/hooks/useTags";
+import Tag from "@/components/ui/Tag";
+import HighlightedItem from "@/components/ui/HighlightedItem";
 
 export default function Home() {
   const {
@@ -16,27 +18,33 @@ export default function Home() {
     return <div>{initialDataError?.message || tagsError?.message}</div>;
 
   return (
-    <>
-      <SectionTitle title="Próximas Transmisiones" />
-      <FutureTransmissions />
+    <div className="flex flex-col gap-8">
+      <section>
+        <SectionTitle title="Destacados" />
+        <ul className="mb-6 flex flex-wrap gap-2">
+          {initialData?.destacados?.map((d) => {
+            return (
+              <li key={d._id}>
+                <HighlightedItem>{d.titulo}</HighlightedItem>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
-      <SectionTitle title="Destacados" />
-      <ul className="mb-6 flex flex-wrap gap-2">
-        {initialData?.destacados?.map((d) => {
-          return <li key={d._id}>{d.titulo}</li>;
-        })}
-      </ul>
+      <section>
+        <SectionTitle title="Próximas Transmisiones" />
+        <FutureTransmissions />
+      </section>
 
-      <SectionTitle title="Tags" />
-      <ul className="mb-6 flex flex-wrap gap-2">
-        {tags?.map((t) => {
-          return (
-            <li key={t._id} className="border px-1">
-              {t.tag}
-            </li>
-          );
-        })}
-      </ul>
-    </>
+      <section>
+        <SectionTitle title="Tags" />
+        <ul className="mb-6 flex flex-wrap gap-2">
+          {tags?.map((t) => {
+            return <li key={t._id}>{t.tag && <Tag tag={t.tag} />}</li>;
+          })}
+        </ul>
+      </section>
+    </div>
   );
 }
