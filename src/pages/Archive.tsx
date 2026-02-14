@@ -1,5 +1,11 @@
 import SectionTitle from "@/components/SectionTitle";
+import PastTransmissions from "@/components/PastTransmissions";
 
 export default function Archive() {
-  return <SectionTitle title="Archivo" />;
+  return (
+    <section>
+      <SectionTitle title="Archivo" />
+      <PastTransmissions />
+    </section>
+  );
 }
