@@ -3,6 +3,7 @@ import type { FutureTransmissionsQueryResult } from "@/lib/types";
 import TransmissionCard from "@/components/ui/TransmissionCard";
 import Button from "@/components/ui/Button";
 import SectionTitle from "@/components/SectionTitle";
+import { Link } from "react-router";
 
 export default function FutureTransmissions() {
   const { data, isLoading, error } = useFutureTransmissions();
@@ -10,12 +11,12 @@ export default function FutureTransmissions() {
   if (isLoading) return <div>cargando...</div>;
   if (error) return <div>{error?.message}</div>;
 
-  if (data?.length < 1) return null;
+  if (data?.length && data.length < 1) return null;
 
   return (
-    <>
+    <section>
       <SectionTitle title="Próximas Transmisiones" />
-      <section className="flex flex-col items-end">
+      <div className="flex flex-col items-end">
         <ul className="mb-6 grid gap-2 lg:grid-cols-3 xl:grid-cols-4">
           {data?.map((t: FutureTransmissionsQueryResult[number]) => {
             return (
@@ -25,8 +26,10 @@ export default function FutureTransmissions() {
             );
           })}
         </ul>
-        <Button>+ ver mas</Button>
-      </section>
-    </>
+        <Button>
+          <Link to="/agenda">{"->"} ver agenda completa</Link>
+        </Button>
+      </div>
+    </section>
   );
 }
