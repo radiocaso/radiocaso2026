@@ -1,3 +1,3 @@
 export default function SectionTitle({ title }: { title: string }) {
-  return <h2 className="mb-4 text-2xl">{title}</h2>;
+  return <h2 className="mb-4 text-xl font-light uppercase italic">{title}</h2>;
 }

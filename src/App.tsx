@@ -9,9 +9,9 @@ import Player from "./components/Player";
 
 function App() {
   return (
-    <div className="px-4 py-4">
+    <div className="px-4 py-4 pb-20">
       <Header />
-      <section className="py-6">
+      <div className="py-6">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/agenda" element={<Schedule />} />
@@ -19,8 +19,8 @@ function App() {
           <Route path="/publicaciones" element={<Publications />} />
           <Route path="/info" element={<Info />} />
         </Routes>
-      </section>
-      <div className="fixed bottom-0 left-0 w-full">
+      </div>
+      <div className="fixed bottom-0 left-0 h-20 w-full bg-black">
         <Player />
       </div>
     </div>
