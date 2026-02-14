@@ -1,7 +1,6 @@
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
 import type { FutureTransmissionsQueryResult } from "@/lib/types";
 import Tag from "@/components/ui/Tag";
+import formatDate from "@/utils/formatDate";
 
 export default function TransissionCard({
   transmission,
@@ -12,14 +11,7 @@ export default function TransissionCard({
     <div className="mb-6 flex h-70 flex-col gap-2 overflow-y-scroll rounded bg-white/5 p-4">
       {transmission.fecha && (
         <h2 className="text-xs">
-          {transmission.fecha &&
-            format(
-              parseISO(transmission.fecha),
-              "⋮ dd 'de' MMMM, yyyy ⋮ HH:mm 'UTC'",
-              {
-                locale: es,
-              },
-            )}
+          {transmission.fecha && formatDate({ date: transmission.fecha })}
         </h2>
       )}
       {transmission.titulo && (
