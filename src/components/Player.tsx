@@ -52,9 +52,12 @@ export default function Player() {
   }, []);
 
   return (
-    <div>
-      <div className="flex h-20 items-center justify-center gap-2 border-t">
-        <button className="w-20 border p-1 uppercase" onClick={handlePlay}>
+    <>
+      <div className="flex h-full items-center justify-start gap-4 border-t border-white/20 p-4">
+        <button
+          className="w-20 border bg-white p-1 text-black uppercase"
+          onClick={handlePlay}
+        >
           {isPlaying ? "pausa" : "play"}
         </button>
 
@@ -74,19 +77,14 @@ export default function Player() {
           max="1"
           step="0.01"
           defaultValue="1"
-          className="h-0.5 w-35 cursor-pointer appearance-auto rounded bg-white accent-white"
+          className="ml-auto h-0.5 w-35 cursor-pointer appearance-auto rounded bg-white accent-white"
           onChange={handleVolumeChange}
         />
       </div>
 
       {currentAudio?.url && (
-        <audio
-          className="w-full"
-          src={currentAudio.url}
-          ref={playerRef}
-          controlsList=""
-        ></audio>
+        <audio src={currentAudio.url} ref={playerRef}></audio>
       )}
-    </div>
+    </>
   );
 }
