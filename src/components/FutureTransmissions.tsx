@@ -1,7 +1,7 @@
 import { useFutureTransmissions } from "@/hooks/useFutureTransmissions";
 import type { FutureTransmissionsQueryResult } from "@/lib/types";
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/locale";
+import TransmissionCard from "@/components/ui/TransmissionCard";
+import Button from "@/components/ui/Button";
 
 export default function FutureTransmissions() {
   const { data, isLoading, error } = useFutureTransmissions();
@@ -10,36 +10,17 @@ export default function FutureTransmissions() {
   if (error) return <div>{error?.message}</div>;
 
   return (
-    <ul className="mb-6">
-      {data?.map((t: FutureTransmissionsQueryResult[number]) => {
-        return (
-          <li key={t._id} className="mb-6 border-b border-white/20 pb-2">
-            {t.fecha && (
-              <h2 className="text-xs">
-                {t.fecha &&
-                  format(
-                    parseISO(t.fecha),
-                    "⋮ dd 'de' MMMM, yyyy ⋮ HH:mm 'UTC'",
-                    {
-                      locale: es,
-                    },
-                  )}
-              </h2>
-            )}
-            {t.titulo && <h1 className="font-bold">{t.titulo}</h1>}
-            {t.contexto?.titulo && <p>{t.contexto.titulo}</p>}
-            {t.programa?.titulo && <p>programa: {t.programa.titulo}</p>}
-            {t.descripcionCorta && <p>{t.descripcionCorta}</p>}
-            {t.tipoDeTransmision && (
-              <p className="flex gap-2 text-xs">
-                {t.tipoDeTransmision?.map((t) => (
-                  <span key={t._id}>{t.tipoDeTransmision}</span>
-                ))}
-              </p>
-            )}
-          </li>
-        );
-      })}
-    </ul>
+    <section className="flex flex-col items-end">
+      <ul className="mb-6 grid gap-2 lg:grid-cols-3 xl:grid-cols-4">
+        {data?.map((t: FutureTransmissionsQueryResult[number]) => {
+          return (
+            <li key={t._id}>
+              <TransmissionCard transmission={t} />
+            </li>
+          );
+        })}
+      </ul>
+      <Button>+ ver mas</Button>
+    </section>
   );
 }
