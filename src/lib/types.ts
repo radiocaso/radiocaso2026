@@ -64,9 +64,7 @@ export type InfoGeneral = {
     _key: string;
   }>;
   configuracionDeTransmision?: string;
-  destacados?: ArrayOf<
-    TransmisionReference | ProgramaReference | ContextoReference
-  >;
+  destacados?: ArrayOf<TransmisionReference | ProgramaReference | ContextoReference>;
 };
 
 export type BlockContent = Array<{
@@ -146,22 +144,7 @@ export type Publicacion = {
     };
     _key: string;
   }>;
-  creditos?: Array<
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-    | PersonaReference
-    | GrupoReference
-  >;
+  creditos?: Array<PersonaReference | GrupoReference | PersonaReference | GrupoReference | PersonaReference | GrupoReference | PersonaReference | GrupoReference | PersonaReference | GrupoReference | PersonaReference | GrupoReference | PersonaReference | GrupoReference>;
 };
 
 export type Slug = {
@@ -214,11 +197,9 @@ export type Transmision = {
   fecha?: string;
   fechaFinal?: string;
   enVivo?: boolean;
-  tipoDeTransmision?: Array<
-    {
-      _key: string;
-    } & TipoDeTransmisionReference
-  >;
+  tipoDeTransmision?: Array<{
+    _key: string;
+  } & TipoDeTransmisionReference>;
   contexto?: ContextoReference;
   locacionGeografica?: {
     ciudad?: string;
@@ -249,11 +230,9 @@ export type Transmision = {
   conduccion?: ArrayOf<PersonaReference | GrupoReference>;
   artistas?: ArrayOf<PersonaReference | GrupoReference>;
   piezasIncluidasDe?: ArrayOf<PersonaReference | GrupoReference>;
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
+  tags?: Array<{
+    _key: string;
+  } & TagReference>;
 };
 
 export type Espacio = {
@@ -305,11 +284,9 @@ export type Programa = {
     };
   };
   coproduccion?: ArrayOf<PersonaReference | GrupoReference>;
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
+  tags?: Array<{
+    _key: string;
+  } & TagReference>;
 };
 
 export type TipoDeContextoReference = {
@@ -330,11 +307,9 @@ export type Contexto = {
   fecha?: string;
   fechaFinal?: string;
   descripcion?: BlockContent;
-  tiposDeContexto?: Array<
-    {
-      _key: string;
-    } & TipoDeContextoReference
-  >;
+  tiposDeContexto?: Array<{
+    _key: string;
+  } & TipoDeContextoReference>;
   imagen?: {
     url?: string;
     archivo?: {
@@ -344,11 +319,9 @@ export type Contexto = {
     };
   };
   produccion?: ArrayOf<PersonaReference | GrupoReference>;
-  tags?: Array<
-    {
-      _key: string;
-    } & TagReference
-  >;
+  tags?: Array<{
+    _key: string;
+  } & TagReference>;
 };
 
 export type TipoDeTransmision = {
@@ -377,11 +350,9 @@ export type Grupo = {
   _rev: string;
   nombre?: string;
   slug?: Slug;
-  integrantes?: Array<
-    {
-      _key: string;
-    } & PersonaReference
-  >;
+  integrantes?: Array<{
+    _key: string;
+  } & PersonaReference>;
   links?: Array<{
     titulo?: string;
     url?: string;
@@ -505,53 +476,17 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes =
-  | SanityImageAssetReference
-  | TransmisionReference
-  | ProgramaReference
-  | ContextoReference
-  | InfoGeneral
-  | BlockContent
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityFileAssetReference
-  | PersonaReference
-  | GrupoReference
-  | Publicacion
-  | Slug
-  | TipoDeTransmisionReference
-  | EspacioReference
-  | TagReference
-  | Transmision
-  | Espacio
-  | Tag
-  | Programa
-  | TipoDeContextoReference
-  | Contexto
-  | TipoDeTransmision
-  | TipoDeContexto
-  | Grupo
-  | Persona
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityImageMetadata
-  | SanityFileAsset
-  | SanityAssetSourceData
-  | SanityImageAsset
-  | Geopoint;
+export type AllSanitySchemaTypes = SanityImageAssetReference | TransmisionReference | ProgramaReference | ContextoReference | InfoGeneral | BlockContent | SanityImageCrop | SanityImageHotspot | SanityFileAssetReference | PersonaReference | GrupoReference | Publicacion | Slug | TipoDeTransmisionReference | EspacioReference | TagReference | Transmision | Espacio | Tag | Programa | TipoDeContextoReference | Contexto | TipoDeTransmision | TipoDeContexto | Grupo | Persona | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-type ArrayOf<T> = Array<
-  T & {
-    _key: string;
-  }
->;
+type ArrayOf<T> = Array<T & {
+  _key: string;
+}>;
 
-// Source: ../radiocaso2026/src/lib/queries/futureTransmissionsQuery.ts
+// Source: ../radiocaso/src/lib/queries/futureTransmissionsQuery.ts
 // Variable: futureTransmissionsQuery
-// Query: *[_type == "transmision" && fecha > now()] | order(fecha asc) {     _id,    titulo,    fecha,    tipoDeTransmision[]->{      _id,      tipoDeTransmision    },    programa->{      _id,      titulo},    contexto->{      _id,      titulo},    descripcionCorta,  }
+// Query: *[_type == "transmision"] | order(fecha asc)[0..3] {     _id,    titulo,    fecha,    tipoDeTransmision[]->{      _id,      tipoDeTransmision    },    programa->{      _id,      titulo},    contexto->{      _id,      titulo},    descripcionCorta,  }
 export type FutureTransmissionsQueryResult = Array<{
   _id: string;
   titulo: string | null;
@@ -571,7 +506,7 @@ export type FutureTransmissionsQueryResult = Array<{
   descripcionCorta: string | null;
 }>;
 
-// Source: ../radiocaso2026/src/lib/queries/initialDataQuery.ts
+// Source: ../radiocaso/src/lib/queries/initialDataQuery.ts
 // Variable: initialDataQuery
 // Query: *[_type == "infoGeneral"][0] {    titulo,    descripcion,    contacto,    redesSociales,    logo,    configuracionDeTransmision,    destacados[]->{      _id,      _type,      titulo,      slug,    },  }
 export type InitialDataQueryResult = {
@@ -592,29 +527,47 @@ export type InitialDataQueryResult = {
     _type: "image";
   } | null;
   configuracionDeTransmision: string | null;
-  destacados: Array<
-    | {
-        _id: string;
-        _type: "contexto";
-        titulo: string | null;
-        slug: Slug | null;
-      }
-    | {
-        _id: string;
-        _type: "programa";
-        titulo: string | null;
-        slug: Slug | null;
-      }
-    | {
-        _id: string;
-        _type: "transmision";
-        titulo: string | null;
-        slug: Slug | null;
-      }
-  > | null;
+  destacados: Array<{
+    _id: string;
+    _type: "contexto";
+    titulo: string | null;
+    slug: Slug | null;
+  } | {
+    _id: string;
+    _type: "programa";
+    titulo: string | null;
+    slug: Slug | null;
+  } | {
+    _id: string;
+    _type: "transmision";
+    titulo: string | null;
+    slug: Slug | null;
+  }> | null;
 } | null;
 
-// Source: ../radiocaso2026/src/lib/queries/publicationsQuery.ts
+// Source: ../radiocaso/src/lib/queries/pastTransmissionsQuery.ts
+// Variable: pastTransmissionsQuery
+// Query: *[_type == "transmision"] | order(fecha desc) {    _id,    titulo,    fecha,    tipoDeTransmision[]->{      _id,      tipoDeTransmision    },    programa->{      _id,      titulo},    contexto->{      _id,      titulo},    descripcionCorta,  }
+export type PastTransmissionsQueryResult = Array<{
+  _id: string;
+  titulo: string | null;
+  fecha: string | null;
+  tipoDeTransmision: Array<{
+    _id: string;
+    tipoDeTransmision: string | null;
+  }> | null;
+  programa: {
+    _id: string;
+    titulo: string | null;
+  } | null;
+  contexto: {
+    _id: string;
+    titulo: string | null;
+  } | null;
+  descripcionCorta: string | null;
+}>;
+
+// Source: ../radiocaso/src/lib/queries/publicationsQuery.ts
 // Variable: publicationsQuery
 // Query: *[_type == "publicacion"] | order(fecha desc) {       _id,      titulo,      slug,      fecha,      tipoDePublicacion,      descripcion,      recursos[]->{        _id,        titulo,        url,        archivo{          asset->{            url          }        },      },      creditos    }
 export type PublicationsQueryResult = Array<{
@@ -628,7 +581,7 @@ export type PublicationsQueryResult = Array<{
   creditos: ArrayOf<GrupoReference | PersonaReference> | null;
 }>;
 
-// Source: ../radiocaso2026/src/lib/queries/tagsQuery.ts
+// Source: ../radiocaso/src/lib/queries/tagsQuery.ts
 // Variable: tagsQuery
 // Query: *[_type == "tag"] {    _id,    tag,  }
 export type TagsQueryResult = Array<{
@@ -640,9 +593,11 @@ export type TagsQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "transmision" && fecha > now()] | order(fecha asc) { \n    _id,\n    titulo,\n    fecha,\n    tipoDeTransmision[]->{\n      _id,\n      tipoDeTransmision\n    },\n    programa->{\n      _id,\n      titulo},\n    contexto->{\n      _id,\n      titulo},\n    descripcionCorta,\n  }': FutureTransmissionsQueryResult;
-    '*[_type == "infoGeneral"][0] {\n    titulo,\n    descripcion,\n    contacto,\n    redesSociales,\n    logo,\n    configuracionDeTransmision,\n    destacados[]->{\n      _id,\n      _type,\n      titulo,\n      slug,\n    },\n  }': InitialDataQueryResult;
-    '*[_type == "publicacion"] | order(fecha desc) { \n      _id,\n      titulo,\n      slug,\n      fecha,\n      tipoDePublicacion,\n      descripcion,\n      recursos[]->{\n        _id,\n        titulo,\n        url,\n        archivo{\n          asset->{\n            url\n          }\n        },\n      },\n      creditos\n    }': PublicationsQueryResult;
-    '*[_type == "tag"] {\n    _id,\n    tag,\n  }': TagsQueryResult;
+    "*[_type == \"transmision\"] | order(fecha asc)[0..3] { \n    _id,\n    titulo,\n    fecha,\n    tipoDeTransmision[]->{\n      _id,\n      tipoDeTransmision\n    },\n    programa->{\n      _id,\n      titulo},\n    contexto->{\n      _id,\n      titulo},\n    descripcionCorta,\n  }": FutureTransmissionsQueryResult;
+    "*[_type == \"infoGeneral\"][0] {\n    titulo,\n    descripcion,\n    contacto,\n    redesSociales,\n    logo,\n    configuracionDeTransmision,\n    destacados[]->{\n      _id,\n      _type,\n      titulo,\n      slug,\n    },\n  }": InitialDataQueryResult;
+    "*[_type == \"transmision\"] | order(fecha desc) {\n    _id,\n    titulo,\n    fecha,\n    tipoDeTransmision[]->{\n      _id,\n      tipoDeTransmision\n    },\n    programa->{\n      _id,\n      titulo},\n    contexto->{\n      _id,\n      titulo},\n    descripcionCorta,\n  }": PastTransmissionsQueryResult;
+    "*[_type == \"publicacion\"] | order(fecha desc) { \n      _id,\n      titulo,\n      slug,\n      fecha,\n      tipoDePublicacion,\n      descripcion,\n      recursos[]->{\n        _id,\n        titulo,\n        url,\n        archivo{\n          asset->{\n            url\n          }\n        },\n      },\n      creditos\n    }": PublicationsQueryResult;
+    "*[_type == \"tag\"] {\n    _id,\n    tag,\n  }": TagsQueryResult;
   }
 }
+
